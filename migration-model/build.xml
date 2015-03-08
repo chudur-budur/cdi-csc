@@ -6,6 +6,8 @@
 <!--<project name="migration-model" default="compile" basedir=".">-->
 <project name="migration-model" basedir=".">
 
+	<!-- bootclasspath -->
+	<property name="java.boot.classpath" value="${env.CLASSPATH}"/>
 	<!-- External libraries path -->
 	<property name="ext.lib.dir" value="libs"/>
 	<!-- Source path -->
@@ -73,11 +75,12 @@
 		<javac	classpathref="jar.external"
 			srcdir="${src.dir}"
 			destdir="${bin.dir}"
+			includeantruntime="false"
 			debug="true"
-			deprecation="false"
-			optimize="true"
-			includeantruntime="false">
-			<!-- source="1.6" target="1.6">	-->			
+			optimize="true">
+			<compilerarg line="-Xbootclasspath:/opt/jdk1.8.0_40/jre/lib/rt.jar -target 1.8 -source 1.6 -Xlint:deprecation" />
+			<!-- bootclasspath="${java.boot.classpath}">-->
+			<!--deprecation="false"-->
 		</javac>
 	</target>
 
